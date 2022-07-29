@@ -1,4 +1,4 @@
-package com.kaplaukhd.images
+package com.kaplaukhd.images.data
 
 sealed class Resource<T>(
     val data: T? = null,

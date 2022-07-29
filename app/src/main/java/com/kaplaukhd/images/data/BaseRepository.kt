@@ -1,4 +1,4 @@
-package com.kaplaukhd.images
+package com.kaplaukhd.images.data
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -7,7 +7,7 @@ import retrofit2.Response
 import java.io.IOException
 
 abstract class BaseRepository() {
-    suspend fun <T> apiCall(apiToBeCalled: suspend () -> Response<T>): Resource<T> {
+    suspend fun <T> apiCall(apiToBeCalled: () -> Response<T>): Resource<T> {
         return withContext(Dispatchers.IO) {
             try {
                 val response: Response<T> = apiToBeCalled()
@@ -15,7 +15,8 @@ abstract class BaseRepository() {
                     Resource.Success(data = response.body()!!)
                 } else {
                     val errorResponse = response.errorBody()
-                    Resource.Error(error = errorResponse?.source().toString() ?: "Something went wrong")
+                    Resource.Error(error = errorResponse?.source().toString()
+                        ?: "Something went wrong")
                 }
             } catch (e: HttpException) {
                 Resource.Error(error = e.message ?: "Something went wrong")
@@ -25,6 +26,5 @@ abstract class BaseRepository() {
                 Resource.Error(error = "Something went wrong")
             }
         }
-    }
     }
 }

@@ -13,5 +13,5 @@ interface RetrofitServices {
 }
 
 object Utils{
-    const val ACCESS_KEY = "87OAMCqefdocJJT7HV1wFFyVgkTOO7v5FBuSaaU9HM8"
+    const val ACCESS_KEY = "YOUR_API_KEY"
 }

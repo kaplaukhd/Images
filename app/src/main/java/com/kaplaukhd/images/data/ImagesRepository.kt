@@ -1,13 +1,16 @@
 package com.kaplaukhd.images.data
 
+import com.kaplaukhd.images.api.ImagesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.await
+import retrofit2.Response
 import javax.inject.Inject
 
-class ImagesRepository @Inject constructor(private val retrofit: RetrofitServices) {
-    suspend fun getImages() =
-        withContext(Dispatchers.IO) {
+class ImagesRepository @Inject constructor(private val retrofit: RetrofitServices) :
+    BaseRepository() {
+    suspend fun getImages(): Response<ArrayList<ImagesApi>> {
+        return withContext(Dispatchers.IO){
             retrofit.getImages()
         }
+    }
 }
