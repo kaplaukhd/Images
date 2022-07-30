@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 interface RetrofitServices {
     @GET("photos")
-     fun getImages(@Query("client_id") clientId: String = ACCESS_KEY): Result<ArrayList<ImagesApi>>
+     fun getImages(@Query("client_id") clientId: String = ACCESS_KEY): Response<ArrayList<ImagesApi>>
 }
 
 object Utils{

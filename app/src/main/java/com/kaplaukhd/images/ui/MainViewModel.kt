@@ -20,7 +20,7 @@ class MainViewModel(private val repository: ImagesRepository) : ViewModel() {
     }
 
     private fun getData() = viewModelScope.launch(Dispatchers.IO) {
-        _data = repository.getImages()
+        _data.postValue(repository.getImages())
     }
 
 }

@@ -33,13 +33,15 @@ class MainActivity : AppCompatActivity() {
         appComponent.inject(this)
         val recycler = findViewById<RecyclerView>(R.id.recycler)
         recycler.setHasFixedSize(true)
-        CoroutineScope(Dispatchers.IO).launch {
-        }
 
         model.data.observe(this){
             when(it){
-                is Result.Error -> recycler.adapter = ImageAdapter(this@MainActivity, it.data!!)
-                is Result.Success -> Toast.makeText(this, it.message.toString(), Toast.LENGTH_LONG).show()
+                is Result.Error -> {
+                    recycler.adapter = ImageAdapter(this@MainActivity, it.data!!)
+                }
+                is Result.Success -> {
+                    Toast.makeText(this, it.message.toString(), Toast.LENGTH_LONG).show()
+                }
             }
 
         }
