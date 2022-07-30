@@ -28,7 +28,7 @@ class ImageAdapter(private val context: Context, private val dataset: ArrayList<
 
 
     class ImageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val image = view.findViewById<ImageView>(R.id.image_holder)
+        val image: ImageView = view.findViewById<ImageView>(R.id.image_holder)
     }
 }
 

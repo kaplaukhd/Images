@@ -1,22 +1,24 @@
-package com.kaplaukhd.images.ui
+package com.kaplaukhd.images.ui.viewModels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kaplaukhd.images.api.ImagesApi
-import com.kaplaukhd.images.data.ImagesRepository
-import com.kaplaukhd.images.data.Result
+import com.kaplaukhd.images.data.repositoroy.ImagesRepository
+import com.kaplaukhd.images.api.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(private val repository: ImagesRepository) : ViewModel() {
+
+class MainViewModel @Inject constructor(private var repository: ImagesRepository) : ViewModel() {
     private var _data = MutableLiveData<Result<ArrayList<ImagesApi>>>()
     val data: LiveData<Result<ArrayList<ImagesApi>>>
         get() = _data
 
     init {
-        data
+        getData()
     }
 
     private fun getData() = viewModelScope.launch(Dispatchers.IO) {

@@ -9,11 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kaplaukhd.images.App
 import com.kaplaukhd.images.R
 import com.kaplaukhd.images.data.AppComponent
-import com.kaplaukhd.images.data.ImagesRepository
-import com.kaplaukhd.images.data.Result
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.kaplaukhd.images.api.Result
+import com.kaplaukhd.images.ui.viewModels.MainViewModel
 import javax.inject.Inject
 
 private val Context.appComponent: AppComponent
@@ -22,24 +19,26 @@ private val Context.appComponent: AppComponent
         else -> this.applicationContext.appComponent
     }
 
+
 class MainActivity : AppCompatActivity() {
-    private val model by lazy {
-        ViewModelProvider(this)[MainViewModel::class.java]
-    }
+    @Inject
+    lateinit var factory: ViewModelProvider.Factory
+    lateinit var model: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         appComponent.inject(this)
+        model = ViewModelProvider(this, factory)[MainViewModel::class.java]
         val recycler = findViewById<RecyclerView>(R.id.recycler)
         recycler.setHasFixedSize(true)
 
-        model.data.observe(this){
-            when(it){
-                is Result.Error -> {
+        model.data.observe(this) {
+            when (it) {
+                is Result.Success -> {
                     recycler.adapter = ImageAdapter(this@MainActivity, it.data!!)
                 }
-                is Result.Success -> {
+                else -> {
                     Toast.makeText(this, it.message.toString(), Toast.LENGTH_LONG).show()
                 }
             }

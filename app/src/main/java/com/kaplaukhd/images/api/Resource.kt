@@ -1,4 +1,4 @@
-package com.kaplaukhd.images.data
+package com.kaplaukhd.images.api
 
 sealed class Result<T>(
     val data: T? = null,
