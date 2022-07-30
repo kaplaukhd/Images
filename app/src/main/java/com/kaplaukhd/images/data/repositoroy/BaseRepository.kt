@@ -11,7 +11,7 @@ import retrofit2.Response
 import java.io.IOException
 
 abstract class BaseRepository {
-   suspend fun <T> networkCall(apiCall: () -> Response<T>): Result<T> =  withContext(Dispatchers.IO) {
+   suspend fun <T> networkCall(apiCall: suspend () -> Response<T>): Result<T> =  withContext(Dispatchers.IO) {
             try {
                 val response: Response<T> = apiCall()
                 if (response.isSuccessful) {

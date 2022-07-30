@@ -8,8 +8,8 @@ import javax.inject.Inject
 class ImagesRepository @Inject constructor(private val retrofit: RetrofitServices) :
     BaseRepository() {
     suspend fun getImages(): Result<ArrayList<ImagesApi>> {
-       return networkCall {
-                retrofit.getImages()
-            }
+        return networkCall {
+            retrofit.getImages()
         }
     }
+}
