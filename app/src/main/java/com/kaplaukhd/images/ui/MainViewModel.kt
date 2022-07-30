@@ -6,21 +6,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kaplaukhd.images.api.ImagesApi
 import com.kaplaukhd.images.data.ImagesRepository
+import com.kaplaukhd.images.data.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: ImagesRepository) : ViewModel() {
-
-    init {
-        getImages()
-    }
-
-    private val _data = MutableLiveData<ArrayList<ImagesApi>>()
-    val data: LiveData<ArrayList<ImagesApi>>
+    private var _data = MutableLiveData<Result<ArrayList<ImagesApi>>>()
+    val data: LiveData<Result<ArrayList<ImagesApi>>>
         get() = _data
 
-   private fun getImages() = viewModelScope.launch(Dispatchers.IO) {
+    init {
+        data
+    }
 
+    private fun getData() = viewModelScope.launch(Dispatchers.IO) {
+        _data = repository.getImages()
     }
 
 }

@@ -9,9 +9,9 @@ import retrofit2.http.Query
 
 interface RetrofitServices {
     @GET("photos")
-    suspend fun getImages(@Query("client_id") clientId: String = ACCESS_KEY): Response<ArrayList<ImagesApi>>
+     fun getImages(@Query("client_id") clientId: String = ACCESS_KEY): Result<ArrayList<ImagesApi>>
 }
 
 object Utils{
-    const val ACCESS_KEY = "YOUR_API_KEY"
+    const val ACCESS_KEY = "87OAMCqefdocJJT7HV1wFFyVgkTOO7v5FBuSaaU9HM8"
 }

@@ -3,12 +3,14 @@ package com.kaplaukhd.images.ui
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.kaplaukhd.images.App
 import com.kaplaukhd.images.R
 import com.kaplaukhd.images.data.AppComponent
 import com.kaplaukhd.images.data.ImagesRepository
+import com.kaplaukhd.images.data.Result
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,8 +26,7 @@ class MainActivity : AppCompatActivity() {
     private val model by lazy {
         ViewModelProvider(this)[MainViewModel::class.java]
     }
-    @Inject
-    lateinit var repository: ImagesRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,7 +37,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         model.data.observe(this){
-            recycler.adapter = ImageAdapter(this@MainActivity, it)
+            when(it){
+                is Result.Error -> recycler.adapter = ImageAdapter(this@MainActivity, it.data!!)
+                is Result.Success -> Toast.makeText(this, it.message.toString(), Toast.LENGTH_LONG).show()
+            }
+
         }
     }
 }
