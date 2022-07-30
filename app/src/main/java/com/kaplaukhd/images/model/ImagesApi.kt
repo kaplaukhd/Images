@@ -1,4 +1,4 @@
-package com.kaplaukhd.images.api
+package com.kaplaukhd.images.model
 
 import com.google.gson.annotations.SerializedName
 

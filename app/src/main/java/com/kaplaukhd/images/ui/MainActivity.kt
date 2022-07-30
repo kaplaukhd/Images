@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kaplaukhd.images.App
 import com.kaplaukhd.images.R
 import com.kaplaukhd.images.data.AppComponent
-import com.kaplaukhd.images.api.Result
+import com.kaplaukhd.images.model.Result
 import com.kaplaukhd.images.ui.viewModels.MainViewModel
 import javax.inject.Inject
 
@@ -23,7 +23,7 @@ private val Context.appComponent: AppComponent
 class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var factory: ViewModelProvider.Factory
-    lateinit var model: MainViewModel
+    private lateinit var model: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +41,8 @@ class MainActivity : AppCompatActivity() {
                 else -> {
                     Toast.makeText(this, it.message.toString(), Toast.LENGTH_LONG).show()
                 }
-            }
 
+            }
         }
     }
 }

@@ -1,7 +1,8 @@
 package com.kaplaukhd.images.data.repositoroy
 
-import com.kaplaukhd.images.api.ImagesApi
-import com.kaplaukhd.images.api.Result
+import androidx.paging.DataSource
+import com.kaplaukhd.images.model.ImagesApi
+import com.kaplaukhd.images.model.Result
 import com.kaplaukhd.images.data.RetrofitServices
 import javax.inject.Inject
 

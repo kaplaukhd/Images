@@ -23,7 +23,7 @@ object AppModule {
     @Provides
     fun provideRetrofit(): RetrofitServices {
         val logging = HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.BASIC)
+            .setLevel(HttpLoggingInterceptor.Level.BODY)
 
         val client = OkHttpClient.Builder()
             .addInterceptor(logging)

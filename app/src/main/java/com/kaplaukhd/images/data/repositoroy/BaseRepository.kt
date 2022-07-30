@@ -3,7 +3,7 @@ package com.kaplaukhd.images.data.repositoroy
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.kaplaukhd.images.api.Result
+import com.kaplaukhd.images.model.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException

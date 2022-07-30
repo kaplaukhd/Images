@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kaplaukhd.images.R
-import com.kaplaukhd.images.api.ImagesApi
+import com.kaplaukhd.images.model.ImagesApi
 
 class ImageAdapter(private val context: Context, private val dataset: ArrayList<ImagesApi>) :
     RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
@@ -21,7 +22,11 @@ class ImageAdapter(private val context: Context, private val dataset: ArrayList<
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val item = dataset[position]
-        Glide.with(context).load(item.urls.small).into(holder.image)
+        val glide = Glide.with(context)
+            .load(item.urls.small)
+            .centerCrop()
+            .into(holder.image)
+
     }
 
     override fun getItemCount() = dataset.size

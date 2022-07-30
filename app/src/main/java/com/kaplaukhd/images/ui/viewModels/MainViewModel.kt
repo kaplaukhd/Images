@@ -4,9 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kaplaukhd.images.api.ImagesApi
+import androidx.paging.DataSource
+import com.kaplaukhd.images.model.ImagesApi
 import com.kaplaukhd.images.data.repositoroy.ImagesRepository
-import com.kaplaukhd.images.api.Result
+import com.kaplaukhd.images.model.Result
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,6 +26,7 @@ class MainViewModel @Inject constructor(private var repository: ImagesRepository
     private fun getData() = viewModelScope.launch(Dispatchers.IO) {
         _data.postValue(repository.getImages())
     }
+
 
 }
 
